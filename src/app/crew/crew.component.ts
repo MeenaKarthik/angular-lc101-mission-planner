@@ -20,7 +20,10 @@ export class CrewComponent implements OnInit {
   }
 
   add(memberName: string, isFirst: boolean){
+       const cleanName = memberName.trim().toLowerCase();
+       if(!this.crew.some(m => m['name'].toLowerCase() === cleanName)){       
        this.crew.push({name: memberName, firstMission: isFirst});
+       }
   }
 
   remove(member: object){
@@ -30,6 +33,11 @@ export class CrewComponent implements OnInit {
 
   edit(member: object){
     this.memberBeingEdited = member;
+  }
+
+  save(name: string, member: object){
+    member['name']=name;
+    this.memberBeingEdited = null;
   }
 
 }
